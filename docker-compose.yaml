@@ -1,0 +1,41 @@
+version: '3'
+services:
+  # Definition for nginx server
+  nginx:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./services/nginx
+    restart: always
+    volumes:
+      - ./services/rest/static:/static
+      - ./services/nginx/logs:/var/logs/
+    ports:
+      - 8000:80
+  # Definition for rdb service
+  rdb:
+    image: postgres:11.2-alpine
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=djangordb
+      - POSTGRES_USER=djangouser
+      - POSTGRES_DB=djangordb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  # Definition for rest service
+  rest:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./services/rest
+    command: >
+      sh -c "gunicorn --bind 0.0.0.0:8080 app.wsgi"
+    volumes:
+      - ./services/rest:/rest
+    environment:
+      - DB_PASSWORD=djangordb
+      - DB_USER=djangouser
+      - DB_NAME=djangordb
+    depends_on:
+      - rdb
+# Backup volumes
+volumes:
+  pgdata:
