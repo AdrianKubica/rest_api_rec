@@ -11,6 +11,8 @@ services:
       - ./services/nginx/logs:/var/logs/
     ports:
       - 8000:80
+    depends_on:
+      - rest
   # Definition for rdb service
   rdb:
     image: postgres:11.2-alpine
@@ -27,7 +29,7 @@ services:
       dockerfile: Dockerfile.dev
       context: ./services/rest
     command: >
-      sh -c "gunicorn --bind 0.0.0.0:8080 app.wsgi"
+      sh -c "gunicorn --config gunicorn_config.py --reload app.wsgi"
     volumes:
       - ./services/rest:/rest
     environment:
