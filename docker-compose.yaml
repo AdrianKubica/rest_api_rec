@@ -28,8 +28,8 @@ services:
     build:
       dockerfile: Dockerfile.dev
       context: ./services/rest
-    command: >
-      sh -c "gunicorn --config gunicorn_config.py --reload app.wsgi"
+    # command: >
+    #   sh -c "gunicorn --config gunicorn_config.py --reload app.wsgi"
     volumes:
       - ./services/rest:/rest
     environment:

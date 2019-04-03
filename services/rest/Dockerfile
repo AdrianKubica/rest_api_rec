@@ -11,3 +11,5 @@ COPY ./ ./
 
 RUN adduser -D prod_user
 USER prod_user
+
+CMD ["gunicorn", "--config", "gunicorn_config.py", "app.wsgi"]
