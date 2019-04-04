@@ -53,14 +53,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'app.urls'
 
-REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    # 'DEFAULT_PERMISSION_CLASSES': [
-    #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    # ]
-}
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -118,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Warsaw'
 
 USE_I18N = True
 
@@ -133,4 +125,20 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-GITHUB_URL = 'https://api.github.com/repos'
+# Django REST Framework settings
+
+REST_FRAMEWORK = {
+    'EXCEPTION_HANDLER': 'core.utils.custom_exception_handler'
+}
+
+# Settings for core REST application
+
+REST_SETTINGS = {
+    'github_url': 'https://api.github.com/repos',
+    'repo_fields': {
+        'full_name': 'fullName',
+        'description': 'description',
+        'clone_url': 'cloneUrl',
+        'stargazers_count': 'stars',
+        'created_at': 'createdAt'}
+}

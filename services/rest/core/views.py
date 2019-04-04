@@ -1,39 +1,41 @@
-# from django.shortcuts import render
-import datetime
+"""
+Some module comments
+"""
 
-from dataclasses import dataclass
-from typing import NewType
-
+import requests
 from rest_framework import views
 from rest_framework.response import Response
+from rest_framework.exceptions import NotFound
+
+from app.settings import REST_SETTINGS
 from core.serializers import UserRepoSerializer
-from core.helpers import get_repo_data
-from app.settings import GITHUB_URL
+from core.utils import get_fields, url_composer
 
-# NewType created for python type hints support
-dt = NewType('dt', datetime.datetime)
-
-@dataclass
-class UserRepo:
-    """Class provided to represent specified user repository details"""
-    id: int
-    fullName: str
-    description: str
-    cloneUrl: str
-    stars: int
-    createdAt: dt
-
-
-user_repos = {
-    1: UserRepo(id=1, fullName='Demo 1', description='xordoquy 1', cloneUrl='http://google.pl', stars=101, createdAt=datetime.datetime.now().isoformat()),
-    2: UserRepo(id=2, fullName='Demo 2', description='xordoquy 2', cloneUrl='http://google.pl', stars=102, createdAt=datetime.datetime.now().isoformat()),
-    3: UserRepo(id=3, fullName='Demo 3', description='xordoquy 3', cloneUrl='http://google.pl', stars=103, createdAt=datetime.datetime.now().isoformat()),
-}
 
 class UserRepoView(views.APIView):
     serializer_class = UserRepoSerializer
 
-    def get(self, request, owner, repo, format=None):
-        repo_data = get_repo_data(GITHUB_URL, owner, repo)
+    def get(self, request, owner, repo):
+        """
+        Some comment for method
+        """
+        # Open requests library session
+        with requests.Session() as session:
+            # Create Github API url for GET method
+            url = url_composer([REST_SETTINGS['github_url'], owner, repo])
+            # Save request results to "res" which stands for response data
+            res = session.get(url)
+            if res.status_code == 404:
+                raise NotFound
+        # Filter response data and fetch only interesting
+        # fields according to REST_SETTINGS configuration
+        repo_data = get_fields(res.json(), REST_SETTINGS['repo_fields'])
+        # Create serializer for selected data
         serializer = UserRepoSerializer(repo_data)
         return Response(serializer.data)
+
+
+class DefaultView(views.APIView):
+    # API errors are handled by core.utils.custom_exception_handler
+    def __repr__(self):
+        return 'default'

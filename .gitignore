@@ -1,9 +1,10 @@
 # IDE specific files
 .vscode
-<<<<<<< HEAD
-=======
+.idea
 
->>>>>>> some_tests
+# Access log production files
+services/nginx/logs/rest.access.log.gz
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
