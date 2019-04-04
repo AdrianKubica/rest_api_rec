@@ -1,6 +1,10 @@
-import pytest
+from unittest.mock import Mock
 
-from core.utils import get_fields, url_composer
+import pytest
+from rest_framework import views
+
+from app.settings import REST_SETTINGS
+from core.utils import get_fields, url_composer, custom_exception_handler
 
 
 @pytest.fixture(autouse=True)
@@ -31,3 +35,48 @@ def test_url_composer(url_parts, expected):
 def test_get_fields(repo_data, repo_fields, expected):
     filtered_data = get_fields(repo_data, repo_fields)
     assert filtered_data == expected
+
+
+class ExceptionHandlerMock:
+    def __init__(self, load_attr):
+        self.__dict__.update(load_attr)
+
+
+class ExceptionMock:
+    def __init__(self, load_attr):
+        self.__dict__.update(load_attr)
+
+    def __getitem__(self, item):
+        return self.__dict__[item]
+
+
+@pytest.fixture(params=[
+    {
+        'data': {'detail': 10},
+        'exception': ExceptionMock({'detail': {'New content'}}),
+        'context': ExceptionMock({'view': 'default'}),
+        'expected': {
+            'data': {
+                'message': 'Not Found',
+                'documentation_url': REST_SETTINGS['documentation_url']
+            }, 'status_code': 404
+        }
+    },
+])
+def exc_handler_mock(request):
+    exc_handler_mock = ExceptionHandlerMock(request.param)
+    return exc_handler_mock
+
+
+def test_custom_exception_handler(exc_handler_mock):
+    views.exception_handler = Mock()
+    views.exception_handler.return_value = exc_handler_mock
+
+    response = custom_exception_handler(
+        exc_handler_mock.exception,
+        exc_handler_mock.context
+    )
+
+    assert response.data == exc_handler_mock.expected['data']
+    assert response.status_code == exc_handler_mock.expected['status_code']
+    assert not hasattr(response, 'detail')

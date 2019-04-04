@@ -4,6 +4,7 @@
 
 # Access log production files
 services/nginx/logs/rest.access.log.gz
+services/app/__pycache__/*
 
 # Compiled files
 services/rest/app/__pycache__/

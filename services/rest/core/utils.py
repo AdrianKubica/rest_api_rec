@@ -3,6 +3,8 @@ from typing import Dict, List
 import requests
 from rest_framework import views
 
+from app.settings import REST_SETTINGS
+
 
 def url_composer(url_parts: List) -> str:
     return '/'.join(map(str, url_parts))
@@ -36,20 +38,20 @@ def get_fields(repo_data: Dict, repo_fields: Dict) -> Dict:
     }
 
 
-def custom_exception_handler(exc, context):
+def custom_exception_handler(exception, context):
     # Call REST framework's default exception handler first,
     # to get the standard error response.
-    response = views.exception_handler(exc, context)
+    response = views.exception_handler(exception, context)
     # Update and add proprietary response data fields
     response.data.update({
-        'message': exc.detail,
-        'documentation_url': 'https://github.com/AdrianKubica/rest_api_rec',
+        'message': exception.detail,
+        'documentation_url': REST_SETTINGS['documentation_url'],
     })
     # Remove redundant detail field
     del response.data['detail']
     # Set "Not Found" msg and 404 status code
     # for all requests directed to inappropriate endpoints
-    if repr(context['view']) == 'default':
-        response.data['message'] = 'Not found.'
+    if str(context['view']) == 'default':
+        response.data['message'] = 'Not Found'
         response.status_code = 404
     return response

@@ -140,5 +140,6 @@ REST_SETTINGS = {
         'description': 'description',
         'clone_url': 'cloneUrl',
         'stargazers_count': 'stars',
-        'created_at': 'createdAt'}
+        'created_at': 'createdAt'},
+    'documentation_url': 'https://github.com/AdrianKubica/rest_api_rec',
 }

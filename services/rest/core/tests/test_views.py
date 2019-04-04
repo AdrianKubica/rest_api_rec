@@ -1,4 +1,4 @@
-from unittest.mock import Mock, MagicMock, patch
+from unittest.mock import Mock
 
 import pytest
 from requests import Session
@@ -24,10 +24,18 @@ def no_requests(monkeypatch):
 
 
 @pytest.fixture(params=[
-    (200, {'a': 10}, b'{}'),
-    (200, {'d': 20}, b'{"a": 2}')
+    (200, {'a': 10, 'b': 20}, b'{}'),
+    (200, {'d': 20}, b'{"a": 2}'),
+    (404, {'d': 20}, {}),
 ])
 def response_mock(request):
+    """
+    :param param[0]: Stands for HTTP status code
+    :param param[1]: Stands for results of data res.json() call
+    :param param[2]: Stands for expected data
+
+    :param request: Stands for pytest fixture
+    """
     response_mock = RequestsResponseMock(
         request.param[0],
         request.param[1],
@@ -42,6 +50,7 @@ def response_mock(request):
 def test_user_repo_view_get(url_request, owner, repo, response_mock):
     Session.get = Mock()
     Session.get.return_value = response_mock
+
     if response_mock.status_code == 404:
         with pytest.raises(NotFound):
             UserRepoView().get(url_request, owner, repo)
