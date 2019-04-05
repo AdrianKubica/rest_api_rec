@@ -119,8 +119,7 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
+# Static files conf for django
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
@@ -131,9 +130,9 @@ REST_FRAMEWORK = {
     'EXCEPTION_HANDLER': 'core.utils.custom_exception_handler'
 }
 
-# Settings for core REST application
+# Settings for CORE REST application check documentation for details
 
-REST_SETTINGS = {
+CORE_REST_SETTINGS = {
     'github_url': 'https://api.github.com/repos',
     'repo_fields': {
         'full_name': 'fullName',
@@ -142,4 +141,9 @@ REST_SETTINGS = {
         'stargazers_count': 'stars',
         'created_at': 'createdAt'},
     'documentation_url': 'https://github.com/AdrianKubica/rest_api_rec',
+    'redis': {
+        'HOST': 'redis',
+        'PORT': 6379,
+        'redis_cache_time': 10  # redis_cache_time in seconds
+    }
 }

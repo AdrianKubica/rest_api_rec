@@ -16,6 +16,7 @@ psycopg2-binary = "*"
 gunicorn = "*"
 gevent = "==1.4.0"
 requests = "*"
+redis = "*"
 
 [requires]
 python_version = "3.7"

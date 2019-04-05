@@ -3,7 +3,7 @@ from unittest.mock import Mock
 import pytest
 from rest_framework import views
 
-from app.settings import REST_SETTINGS
+from app.settings import CORE_REST_SETTINGS
 from core.utils import get_fields, url_composer, custom_exception_handler
 
 
@@ -58,7 +58,7 @@ class ExceptionMock:
         'expected': {
             'data': {
                 'message': 'Not Found',
-                'documentation_url': REST_SETTINGS['documentation_url']
+                'documentation_url': CORE_REST_SETTINGS['documentation_url']
             }, 'status_code': 404
         }
     },
