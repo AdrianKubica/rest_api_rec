@@ -31,6 +31,7 @@ class UserRepoView(views.APIView):
         # fields according to REST_SETTINGS configuration
         repo_data = get_fields(res.json(), REST_SETTINGS['repo_fields'])
         # Create serializer for selected data
+        import pdb; pdb.set_trace()
         serializer = UserRepoSerializer(repo_data)
         return Response(serializer.data)
 

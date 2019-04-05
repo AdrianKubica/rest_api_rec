@@ -9,13 +9,14 @@ from app.settings import REST_SETTINGS
 def url_composer(url_parts: List) -> str:
     return '/'.join(map(str, url_parts))
 
-
-def get_auth(user: str, password: str) -> requests.auth.HTTPBasicAuth:
-    auth = requests.auth.HTTPBasicAuth(
-        username='',
-        password=''
-    )
-    return auth
+#
+# def get_auth(user: str, password: str) -> requests.auth.HTTPBasicAuth:
+#     auth = requests.auth.HTTPBasicAuth(
+#         username='',
+#         password=''
+#     )
+#     return auth
+#
 
 
 def get_fields(repo_data: Dict, repo_fields: Dict) -> Dict:
