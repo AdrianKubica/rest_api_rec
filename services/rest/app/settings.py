@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import logging.config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -134,16 +135,45 @@ REST_FRAMEWORK = {
 
 CORE_REST_SETTINGS = {
     'GITHUB_URL': 'https://api.github.com/repos',
+    'CREDENTIALS': {
+        'USER_NAME': os.getenv('GITHUB_USER'),
+        'USER_PASSWORD': os.getenv('GITHUB_PASSWORD'),
+    },
     'REPO_FIELDS': {
         'full_name': 'fullName',
         'description': 'description',
         'clone_url': 'cloneUrl',
         'stargazers_count': 'stars',
-        'created_at': 'createdAt'},
+        'created_at': 'createdAt',
+    },
     'DOCUMENTATION_URL': 'https://github.com/AdrianKubica/rest_api_rec',
-    'REDIS': {
+    'REDIS_CACHE': {
         'HOST': 'redis',
         'PORT': 6379,
-        'REDIS_CACHE_TIME': 10  # REDIS_CACHE_TIME in seconds
+        'REDIS_CACHE_TIME': 10,  # REDIS_CACHE_TIME in seconds
     }
 }
+
+# Configure logging messages
+
+logging.config.dictConfig({
+    'version': 1,
+    'formatters': {
+        'console': {
+            'format': '[%(asctime)s] [%(levelname)s] [%(name)s] %(message)s',
+            'datefmt': '%Y-%m-%d %H:%M:%S',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'console',
+        },
+    },
+    'loggers': {
+        '': {
+            'level': 'WARNING',
+            'handlers': ['console'],
+        },
+    },
+})

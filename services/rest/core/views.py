@@ -2,6 +2,8 @@
 Some module comments
 """
 
+import logging
+
 import redis
 from requests import Session
 from requests.adapters import HTTPAdapter
@@ -11,11 +13,16 @@ from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
 
 from app.settings import CORE_REST_SETTINGS
+from core.exceptions import CredentialException, ConnectionException, TimeoutException
 from core.serializers import UserRepoSerializer
-from core.utils import get_fields, url_composer, ConnectionErrorException, TimeoutErrorException, set_cache, get_cache
+from core.utils import get_fields, set_cache, get_auth, get_cache, url_composer
+
+logger = logging.getLogger(__name__)
 
 # Connect to Redis instance
-redis_conn = redis.Redis(host=CORE_REST_SETTINGS['REDIS']['HOST'], port=CORE_REST_SETTINGS['REDIS']['PORT'], db=0)
+redis_conn = redis.Redis(host=CORE_REST_SETTINGS['REDIS_CACHE']['HOST'],
+                         port=CORE_REST_SETTINGS['REDIS_CACHE']['PORT'],
+                         db=0)
 
 
 class UserRepoView(views.APIView):
@@ -38,9 +45,11 @@ class UserRepoView(views.APIView):
                 # TODO: session headers according to Github API docs
                 # Mounting http_adapter for Github API
                 session.mount('https://api.github.com', http_adapter)
-
-                # session.auth = 'tutaj session obj' if 'session object' else None
-
+                # Get authenticated session
+                session.auth = get_auth()
+                # According to Gihub API explicitly choose API version, it can be changed in the future
+                session.headers.update({'Accept': 'application/vnd.github.v3+json'})
+                logger.error('czy to działa')
                 # Create Github API url for GET method
                 url = url_composer([CORE_REST_SETTINGS['GITHUB_URL'], owner, repo])
 
@@ -51,17 +60,22 @@ class UserRepoView(views.APIView):
                     res = session.get(url, timeout=3)
                     res.raise_for_status()
                 except HTTPError:
-                    if res.status_code == 404:
+                    # Inappropriate credentials for Github
+                    if res.status_code == 401:
+                        raise CredentialException
+                    elif res.status_code == 404:
+                        # Inappropriate repo owner or repo name
                         raise NotFound
                     # TODO: obsługa pozostałych błędów
                 except ConnectionError:
                     # TODO: logging info to file
                     # need to predefine own exceptions according to DRF custom exemption handler
-                    raise ConnectionErrorException
+                    raise ConnectionException
                 except Timeout:
                     # TODO: logging info
-                    raise TimeoutErrorException
+                    raise TimeoutException
                 else:
+                    # TODO: jakies inne bledy do obslugi
                     # Filter response data and fetch only interesting fields according to REST_SETTINGS configuration
                     # from settings.py
                     repo_data = get_fields(res.json(), CORE_REST_SETTINGS['REPO_FIELDS'])
@@ -69,7 +83,7 @@ class UserRepoView(views.APIView):
         # Create serializer for selected data
         serializer = UserRepoSerializer(repo_data)
         # SET redis cache to protect internet bandwith
-        set_cache(owner + repo, serializer.data, redis_conn, CORE_REST_SETTINGS['REDIS']['REDIS_CACHE_TIME'])
+        set_cache(owner + repo, serializer.data, redis_conn, CORE_REST_SETTINGS['REDIS_CACHE']['REDIS_CACHE_TIME'])
         return Response(serializer.data)
 
 

@@ -7,9 +7,9 @@ import hashlib
 from typing import Dict, List
 
 import redis
-from django.utils.translation import ugettext_lazy as _
+
+from requests.auth import HTTPBasicAuth
 from rest_framework import status, views
-from rest_framework.exceptions import APIException
 
 from app.settings import CORE_REST_SETTINGS
 
@@ -17,26 +17,11 @@ from app.settings import CORE_REST_SETTINGS
 def url_composer(url_parts: List) -> str:
     return '/'.join(map(str, url_parts))
 
-#
-# def get_auth(user: str, password: str) -> requests.auth.HTTPBasicAuth:
-#     auth = requests.auth.HTTPBasicAuth(
-#         username='',
-#         password=''
-#     )
-#     return auth
-#
 
-
-class ConnectionErrorException(APIException):
-    status_code = 503
-    default_detail = _('Service Unavailable (connection error): max retries exceeded')
-    default_code = 'connection_error'
-
-
-class TimeoutErrorException(APIException):
-    status_code = 504
-    default_detail = _('Gateway Timeout: Unable to reach GITHUB API')
-    default_code = 'connection_error'
+def get_auth() -> HTTPBasicAuth:
+    auth = HTTPBasicAuth(username=CORE_REST_SETTINGS['CREDENTIALS']['USER_NAME'],
+                         password=CORE_REST_SETTINGS['CREDENTIALS']['USER_PASSWORD'])
+    return auth
 
 
 def get_fields(repo_data: Dict, repo_fields: Dict) -> Dict:

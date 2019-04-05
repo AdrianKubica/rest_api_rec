@@ -37,6 +37,8 @@ services:
     volumes:
       - ./services/rest:/rest
     environment:
+      - GITHUB_USER=somegithubtestuser
+      - GITHUB_PASSWORD=somegithubtestpassword
       - DB_PASSWORD=djangordb
       - DB_USER=djangouser
       - DB_NAME=djangordb
