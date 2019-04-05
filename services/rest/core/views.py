@@ -15,7 +15,7 @@ from core.serializers import UserRepoSerializer
 from core.utils import get_fields, url_composer, ConnectionErrorException, TimeoutErrorException, set_cache, get_cache
 
 # Connect to Redis instance
-redis_conn = redis.Redis(host=CORE_REST_SETTINGS['redis']['HOST'], port=CORE_REST_SETTINGS['redis']['PORT'], db=0)
+redis_conn = redis.Redis(host=CORE_REST_SETTINGS['REDIS']['HOST'], port=CORE_REST_SETTINGS['REDIS']['PORT'], db=0)
 
 
 class UserRepoView(views.APIView):
@@ -39,22 +39,24 @@ class UserRepoView(views.APIView):
                 # Mounting http_adapter for Github API
                 session.mount('https://api.github.com', http_adapter)
 
+                # session.auth = 'tutaj session obj' if 'session object' else None
+
                 # Create Github API url for GET method
-                url = url_composer([CORE_REST_SETTINGS['github_url'], owner, repo])
+                url = url_composer([CORE_REST_SETTINGS['GITHUB_URL'], owner, repo])
 
                 # By default, requests do not time out unless a timeout value is set explicitly. Without a timeout,
                 # code may hang for minutes or more, so set connection timeout
                 try:
                     # Save request results to "res" which stands for response data and take care about timeout attribute
-                    res = session.get(url, timeout=3.05)
+                    res = session.get(url, timeout=3)
                     res.raise_for_status()
                 except HTTPError:
                     if res.status_code == 404:
                         raise NotFound
-                    # tutaj jeszcze rzucic ten blad http
                     # TODO: obsługa pozostałych błędów
                 except ConnectionError:
                     # TODO: logging info to file
+                    # need to predefine own exceptions according to DRF custom exemption handler
                     raise ConnectionErrorException
                 except Timeout:
                     # TODO: logging info
@@ -62,12 +64,12 @@ class UserRepoView(views.APIView):
                 else:
                     # Filter response data and fetch only interesting fields according to REST_SETTINGS configuration
                     # from settings.py
-                    repo_data = get_fields(res.json(), CORE_REST_SETTINGS['repo_fields'])
+                    repo_data = get_fields(res.json(), CORE_REST_SETTINGS['REPO_FIELDS'])
 
         # Create serializer for selected data
         serializer = UserRepoSerializer(repo_data)
-        # SET redis cache to protect internet badwith
-        set_cache(owner + repo, serializer.data, redis_conn, CORE_REST_SETTINGS['redis']['redis_cache_time'])
+        # SET redis cache to protect internet bandwith
+        set_cache(owner + repo, serializer.data, redis_conn, CORE_REST_SETTINGS['REDIS']['REDIS_CACHE_TIME'])
         return Response(serializer.data)
 
 

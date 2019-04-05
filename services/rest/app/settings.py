@@ -133,17 +133,17 @@ REST_FRAMEWORK = {
 # Settings for CORE REST application check documentation for details
 
 CORE_REST_SETTINGS = {
-    'github_url': 'https://api.github.com/repos',
-    'repo_fields': {
+    'GITHUB_URL': 'https://api.github.com/repos',
+    'REPO_FIELDS': {
         'full_name': 'fullName',
         'description': 'description',
         'clone_url': 'cloneUrl',
         'stargazers_count': 'stars',
         'created_at': 'createdAt'},
-    'documentation_url': 'https://github.com/AdrianKubica/rest_api_rec',
-    'redis': {
+    'DOCUMENTATION_URL': 'https://github.com/AdrianKubica/rest_api_rec',
+    'REDIS': {
         'HOST': 'redis',
         'PORT': 6379,
-        'redis_cache_time': 10  # redis_cache_time in seconds
+        'REDIS_CACHE_TIME': 10  # REDIS_CACHE_TIME in seconds
     }
 }

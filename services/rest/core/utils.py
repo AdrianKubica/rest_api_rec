@@ -6,6 +6,7 @@ import json
 import hashlib
 from typing import Dict, List
 
+import redis
 from django.utils.translation import ugettext_lazy as _
 from rest_framework import status, views
 from rest_framework.exceptions import APIException
@@ -51,10 +52,7 @@ def get_fields(repo_data: Dict, repo_fields: Dict) -> Dict:
     :rtype: Dict
     """
     # Python dictionary comprehension for filtering and handling field names transition in one step
-    return {
-        repo_fields[key]: value for key, value in repo_data.items()
-        if key in repo_fields.keys()
-    }
+    return {repo_fields[key]: value for key, value in repo_data.items() if key in repo_fields.keys()}
 
 
 def custom_exception_handler(exception, context):
@@ -63,7 +61,7 @@ def custom_exception_handler(exception, context):
     # Update and add proprietary response data fields
     response.data.update({
         'message': exception.detail,
-        'documentation_url': CORE_REST_SETTINGS['documentation_url'],
+        'documentation_url': CORE_REST_SETTINGS['DOCUMENTATION_URL'],
     })
     # Remove redundant detail field from predefined DRF response
     del response.data['detail']
@@ -77,15 +75,24 @@ def custom_exception_handler(exception, context):
 def set_cache(key, value, r_conn, ex_time_secs):
     hash_key = hashlib.sha256(key.encode('utf-8')).hexdigest()
     json_value = json.dumps(value)
-    r_conn.set(name=hash_key, value=json_value, ex=ex_time_secs)
+    try:
+        r_conn.set(name=hash_key, value=json_value, ex=ex_time_secs)
+    except redis.ConnectionError:
+        pass  # TODO there is no way to get Redis, logging to file
 
 
 def get_cache(key, redis_conn):
     hash_key = hashlib.sha256(key.encode('utf-8')).hexdigest()
-    redis_value = redis_conn.get(hash_key)
-    if redis_value:  # It will be set to None if there is no key in redis
-        print('OK there is a key i am going to return appropriate value')
-        return json.loads(redis_value)
+    try:
+        redis_value = redis_conn.get(hash_key)
+    except redis.ConnectionError:
+        # TODO: logging connection error, there is no way to get redis
+        print('Redis dont work')
+        return None
     else:
-        print('OK no key i am going to return None')
-        return redis_values  # It will be set to None if there is no key in redis
+        if redis_value:  # It will be set to None if there is no key in redis
+            print('OK there is a key i am going to return appropriate value')
+            return json.loads(redis_value)
+        else:
+            print('OK no key i am going to return None')
+            return redis_value  # It will be set to None if there is no key in redis
