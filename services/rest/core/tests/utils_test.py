@@ -58,7 +58,7 @@ class ExceptionMock:
         'expected': {
             'data': {
                 'message': 'Not Found',
-                'documentation_url': CORE_REST_SETTINGS['documentation_url']
+                'documentation_url': CORE_REST_SETTINGS['DOCUMENTATION_URL']
             }, 'status_code': 404
         }
     },

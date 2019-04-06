@@ -16,5 +16,5 @@ class ConnectionException(APIException):
 
 class TimeoutException(APIException):
     status_code = 504
-    default_detail = 'Gateway Timeout: Unable to reach GITHUB API'
+    default_detail = 'Timeout Error: Unable to reach GITHUB API'
     default_code = 'connection_error'

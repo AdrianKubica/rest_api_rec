@@ -36,20 +36,18 @@ class UserRepoView(views.APIView):
         repo_data = get_cache(owner + repo, redis_conn)
         # If there is no value in cache which stands for "None" then try to pull it from Github API
         if repo_data is None:
-            print('You hit the Github API')
+            # import pdb; pdb.set_trace()
             # Create session adapter with retry connection attribute
             http_adapter = HTTPAdapter(max_retries=3)
 
             # Open requests library session to keep persistent connection
             with Session() as session:
-                # TODO: session headers according to Github API docs
                 # Mounting http_adapter for Github API
                 session.mount('https://api.github.com', http_adapter)
                 # Get authenticated session
                 session.auth = get_auth()
                 # According to Gihub API explicitly choose API version, it can be changed in the future
                 session.headers.update({'Accept': 'application/vnd.github.v3+json'})
-                logger.error('czy to działa')
                 # Create Github API url for GET method
                 url = url_composer([CORE_REST_SETTINGS['GITHUB_URL'], owner, repo])
 
@@ -62,17 +60,19 @@ class UserRepoView(views.APIView):
                 except HTTPError:
                     # Inappropriate credentials for Github
                     if res.status_code == 401:
+                        logger.exception(f'[Status code: {res.status_code}] Credential error')
                         raise CredentialException
                     elif res.status_code == 404:
+                        logger.exception(f'[Status code: {res.status_code}] Not found')
                         # Inappropriate repo owner or repo name
                         raise NotFound
-                    # TODO: obsługa pozostałych błędów
+                    # TODO: obsługa pozostałych błędów HTTP
                 except ConnectionError:
-                    # TODO: logging info to file
+                    logger.exception('[Status code: 503] Service Unavailable: max retries exceeded')
                     # need to predefine own exceptions according to DRF custom exemption handler
                     raise ConnectionException
                 except Timeout:
-                    # TODO: logging info
+                    logger.exception('[Status code: 504] Timeout Error: Unable to reach GITHUB API')
                     raise TimeoutException
                 else:
                     # TODO: jakies inne bledy do obslugi

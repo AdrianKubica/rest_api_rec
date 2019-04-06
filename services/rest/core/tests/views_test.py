@@ -18,6 +18,9 @@ class RequestsResponseMock:
     def json(self):
         return self.result
 
+    def raise_for_status(self):
+        pass
+
 
 @pytest.fixture(autouse=True)
 def no_requests(monkeypatch):
@@ -42,7 +45,7 @@ def no_requests(monkeypatch):
          'createdAt': '2011-02-13T18:38:17Z'
         }, separators=(',', ':')).encode('utf-8'),
      ),
-    (404, {'d': 20}, {}),
+    (404, {'d': 20}, b'{}'),
 ])
 def response_mock(request):
     """
