@@ -1,25 +1,34 @@
 import json
-from unittest.mock import Mock
+from unittest.mock import Mock, MagicMock
 
 import pytest
-from requests import Session
-from rest_framework.exceptions import NotFound
+import requests
+from requests import Session, Response
+from rest_framework.exceptions import APIException
 from rest_framework.renderers import JSONRenderer
+from rest_framework.request import Request
 
 from core.views import UserRepoView, DefaultView
 
 
-class RequestsResponseMock:
+class ResponseMock(Response):
     def __init__(self, status_code, result, expected):
         self.status_code = status_code
         self.result = result
         self.expected = expected
+        self.reason = ''
+        self.url = ''
 
     def json(self):
         return self.result
 
     def raise_for_status(self):
-        pass
+        super().raise_for_status()
+
+
+class RequestMock(Request):
+    def __init__(self):
+        self.method = None
 
 
 @pytest.fixture(autouse=True)
@@ -45,7 +54,7 @@ def no_requests(monkeypatch):
          'createdAt': '2011-02-13T18:38:17Z'
         }, separators=(',', ':')).encode('utf-8'),
      ),
-    (404, {'d': 20}, b'{}'),
+    (404, {'message': ''}, b'{}'),
 ])
 def response_mock(request):
     """
@@ -55,7 +64,7 @@ def response_mock(request):
 
     :param request: Stands for pytest fixture
     """
-    response_mock = RequestsResponseMock(
+    response_mock = ResponseMock(
         request.param[0],
         request.param[1],
         request.param[2]
@@ -63,18 +72,18 @@ def response_mock(request):
     return response_mock
 
 
-@pytest.mark.parametrize('url_request, owner, repo', (
-        ('url_request', 'john', 'some_project'),
+@pytest.mark.parametrize('owner, repo_name', (
+        ('john', 'some_project'),
 ))
-def test_user_repo_view_get(url_request, owner, repo, response_mock):
+def test_user_repo_view_get(owner, repo_name, response_mock):
     Session.get = Mock()
     Session.get.return_value = response_mock
 
     if response_mock.status_code == 404:
-        with pytest.raises(NotFound):
-            UserRepoView().get(url_request, owner, repo)
+        with pytest.raises((requests.HTTPError, APIException)):
+            UserRepoView().get(RequestMock(), owner, repo_name)
     else:
-        response = UserRepoView().get(url_request, owner, repo)
+        response = UserRepoView().get(RequestMock(), owner, repo_name)
         response.accepted_renderer = JSONRenderer()
         response.accepted_media_type = "application/json"
         response.renderer_context = {}

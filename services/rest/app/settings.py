@@ -131,6 +131,23 @@ REST_FRAMEWORK = {
     'EXCEPTION_HANDLER': 'core.utils.custom_exception_handler'
 }
 
+# Redis Cache settings
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://redis:6379",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient"
+        },
+        "KEY_PREFIX": "rest"
+    }
+}
+
+# Redis cache time to live is 15 minutes.
+
+CACHE_TTL = 60 * 15
+
 # Settings for CORE REST application check documentation for details
 
 CORE_REST_SETTINGS = {
@@ -147,11 +164,11 @@ CORE_REST_SETTINGS = {
         'created_at': 'createdAt',
     },
     'DOCUMENTATION_URL': 'https://github.com/AdrianKubica/rest_api_rec',
-    'REDIS_CACHE': {
-        'HOST': 'redis',
-        'PORT': 6379,
-        'REDIS_CACHE_TIME': 10,  # REDIS_CACHE_TIME in seconds
-    }
+    # 'REDIS_CACHE': {
+    #     'HOST': 'redis',
+    #     'PORT': 6379,
+    #     'REDIS_CACHE_TIME': 10,  # REDIS_CACHE_TIME in seconds
+    # }
 }
 
 # Configure logging messages
