@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '-^26!&88py4!ogzqv)isxhtl7_^m+-impj8ol99)(*!y39#0q*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', '192.168.99.100']
 
@@ -172,7 +172,7 @@ logging.config.dictConfig({
     },
     'loggers': {
         '': {
-            'level': 'WARNING',
+            'level': 'INFO',
             'handlers': ['console'],
         },
     },

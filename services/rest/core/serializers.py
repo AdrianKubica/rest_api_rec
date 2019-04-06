@@ -7,3 +7,4 @@ class UserRepoSerializer(serializers.Serializer):
     cloneUrl = serializers.URLField(read_only=True)
     stars = serializers.IntegerField(read_only=True)
     createdAt = serializers.DateTimeField(read_only=True)
+
