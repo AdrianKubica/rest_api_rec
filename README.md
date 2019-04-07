@@ -9,7 +9,7 @@ You can simply run this project with `docker-compose`:
 >>> docker-compose up --build -d
 ```
 
-Then go to HOST IP address and try to retrieve user repository information using following endpoint:
+Then go to your HOST IP address and try to retrieve user repository information using following endpoint:
 `/repositories/{owner}/{repository-name}`. Replace `{owner}` and `{respository-name}` with appropriate values for truly existing user repository.
 
 
@@ -27,7 +27,7 @@ Development version consists:
 - testing environments: simply run `pytest` command,
 - linter to check project consistency with PEP8: simply run `flake8` command.
 
-There is also TravisCI configuration for Github which is able to make integrity tests after each commit push to Github.
+There is also TravisCI configuration for Github which is able to make integrity tests after each commit pushed to Github.
 If integrity tests are correct, you can for example prepare production ready builds and send it to http://hub.docker/hub. 
 
 There is also much more options to run robust instances of this project.
@@ -49,7 +49,8 @@ This project is able to make some trade-offs, consider following:
     - django security keys and so on
 - keep in mind that its risky to keep and send those information's to Github repository.
 
-You should consider to use Host OS environment variables and load those variables to specific Dockerfiles with `ENV VARIABLE_NAME ${VARIABLE_NAME}` syntax.
+You should consider to use Host OS environment variables and load those variables to specific Dockerfiles with:
+`ENV VARIABLE_NAME ${VARIABLE_NAME}` syntax.
 
 Questions:
 ----------
