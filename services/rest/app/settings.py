@@ -21,10 +21,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '-^26!&88py4!ogzqv)isxhtl7_^m+-impj8ol99)(*!y39#0q*'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')  # '-^26!&88py4!ogzqv)isxhtl7_^m+-impj8ol99)(*!y39#0q*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv('DJANGO_DEBUG_MODE')
 
 ALLOWED_HOSTS = ['127.0.0.1', '192.168.99.100']
 
@@ -71,21 +71,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'app.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': 'rdb',
-        'PORT': '5432',
-    }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -164,11 +149,6 @@ CORE_REST_SETTINGS = {
         'created_at': 'createdAt',
     },
     'DOCUMENTATION_URL': 'https://github.com/AdrianKubica/rest_api_rec',
-    # 'REDIS_CACHE': {
-    #     'HOST': 'redis',
-    #     'PORT': 6379,
-    #     'REDIS_CACHE_TIME': 10,  # REDIS_CACHE_TIME in seconds
-    # }
 }
 
 # Configure logging messages

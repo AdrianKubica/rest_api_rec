@@ -42,21 +42,8 @@ class ExceptionMock:
             'data': {
                 'message': 'New content',
                 'documentation_url': CORE_REST_SETTINGS['DOCUMENTATION_URL']
-            }, 'status_code': 404
+            }
         },
-        'status_code': 404
-    },
-    {
-        'data': {'detail': 10},
-        'exception': ExceptionMock({'default_detail': 'New content'}),
-        'context': ExceptionMock({'view': 'default'}),
-        'expected': {
-            'data': {
-                'message': 'Not Found',
-                'documentation_url': CORE_REST_SETTINGS['DOCUMENTATION_URL']
-            }, 'status_code': 404
-        },
-        'status_code': 402
     },
 ])
 def exc_handler_mock(request):
@@ -71,4 +58,6 @@ def test_custom_exception_handler(exc_handler_mock):
     response = custom_exception_handler(exc_handler_mock.exception, exc_handler_mock.context)
 
     assert response.data == exc_handler_mock['expected']['data']
-    assert response.status_code == exc_handler_mock['expected']['status_code']
+    assert hasattr(response, 'data')
+    assert 'message' in response.data.keys()
+    assert 'documentation_url' in response.data.keys()

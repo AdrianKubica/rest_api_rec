@@ -24,7 +24,7 @@ To run REST_API you simply need:
 installed and then: `docker-compose up --build -d` will build and run production ready service for you.
 There is also possibility to build and run development version with `docker-compose up -f docker-compose.dev.yaml --build -d`.
 Development version consists:
-- testing environments: simply run `pytest` command using `rest` container,
+- testing environments: simply run `pytest` command using `rest` container (currently 100% of tests coverage),
 - linter to check project consistency with PEP8: simply run `flake8` command using `rest` container.
 
 There is also TravisCI configuration for Github which is able to make integrity tests after each commit pushed to Github.
@@ -44,14 +44,14 @@ Notes
 -----
 
 This project is able to make some trade-offs, consider following:
-- there is some security settings vulnerabilities which are simply put in docker-compose.yaml files, its for example:
+- there is some security settings vulnerabilities which are simply put in Dockerfile.yaml / docker-compose.yaml files, its for example:
     - user accounts credentials (some user Github account is created for support this project and all credentials are typed in plain text in docker-compose.yaml)
     - database settings
     - django security keys and so on
 - keep in mind that its risky to keep and send those information's to Github repository.
 
 You should consider to use Host OS environment variables and load those variables to specific Dockerfiles with:
-`ENV VARIABLE_NAME ${VARIABLE_NAME}` syntax.
+`ENV VARIABLE_NAME ${VARIABLE_NAME}` syntax. In more complex project you should also consider to split your settings.py files for production and development environments.
 
 Questions:
 ----------

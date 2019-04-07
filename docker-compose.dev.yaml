@@ -8,7 +8,6 @@ services:
     restart: always
     volumes:
       - ./services/rest/static:/static
-      - ./services/nginx/logs:/var/logs/
     ports:
       - 80:80
     depends_on:
@@ -17,34 +16,15 @@ services:
   redis:
     image: redis:latest
     restart: always
-  # Definition for rdb service
-  rdb:
-    image: postgres:11.2-alpine
-    restart: always
-    environment:
-      - POSTGRES_PASSWORD=djangordb
-      - POSTGRES_USER=djangouser
-      - POSTGRES_DB=djangordb
-    volumes:
-      - pgdata:/var/lib/postgresql/data
   # Definition for rest service
   rest:
     build:
       dockerfile: Dockerfile.dev
       context: ./services/rest
-    # command: >
-    #   sh -c "gunicorn --config gunicorn_config.py --reload app.wsgi"
     volumes:
       - ./services/rest:/rest
     environment:
       - GITHUB_USER=somegithubtestuser
       - GITHUB_PASSWORD=somegithubtestpassword
-      - DB_PASSWORD=djangordb
-      - DB_USER=djangouser
-      - DB_NAME=djangordb
     depends_on:
       - redis
-      - rdb
-# Backup volumes
-volumes:
-  pgdata:

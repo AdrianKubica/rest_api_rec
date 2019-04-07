@@ -11,7 +11,8 @@ from django.views.decorators.vary import vary_on_cookie
 from requests import Session
 from requests.adapters import HTTPAdapter
 from requests.exceptions import ConnectionError, HTTPError, Timeout
-from rest_framework import views
+from rest_framework import views, status
+from rest_framework.decorators import api_view
 from rest_framework.exceptions import APIException
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -99,22 +100,7 @@ class UserRepoView(views.APIView):
                 return Response(serializer.data)
 
 
-# @api_view()
-# def error_page(request):
-#     return Response({'detail': 'Not found'}, status=status.HTTP_404_NOT_FOUND)
-
-class DefaultView(views.APIView):
-    """
-    DefaultView handles each request directed to unknown CORE REST endpoints
-    """
-    # Core REST API errors are handled by core.utils.custom_exception_handler. If error occurs and exception context
-    # handler is set to "default" then 404 Not Found response is generated. There is no need to make requests
-    # to GithubAPI if Core REST API gets inappropriate url in request
-    def __repr__(self) -> str:
-        """
-        __repr__ is special method which returns string object representation
-
-        :return: String object representation
-        :rtype: str
-        """
-        return 'default'
+@api_view()
+def other_endpoint(request):
+    return Response({'message': 'Not found', 'documentation_url': CORE_REST_SETTINGS['DOCUMENTATION_URL']},
+                    status=status.HTTP_404_NOT_FOUND)

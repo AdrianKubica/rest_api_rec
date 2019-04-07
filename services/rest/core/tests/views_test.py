@@ -1,14 +1,16 @@
 import json
-from unittest.mock import Mock, MagicMock
+from unittest.mock import Mock
 
 import pytest
 import requests
+from django.test import RequestFactory
 from requests import Session, Response
 from rest_framework.exceptions import APIException
 from rest_framework.renderers import JSONRenderer
 from rest_framework.request import Request
 
-from core.views import UserRepoView, DefaultView
+from app.settings import CORE_REST_SETTINGS
+from core.views import UserRepoView, other_endpoint
 
 
 class ResponseMock(Response):
@@ -101,5 +103,8 @@ def test_user_repo_view_get(owner, repo_name, response_mock):
         assert response.content == response_mock.expected
 
 
-def test_default_view():
-    assert repr(DefaultView()) == 'default'
+def test_other_endpoint_view():
+    request_factory = RequestFactory()
+    request = request_factory.get('/path', data={'name': u'test'})
+    response = other_endpoint(request)
+    assert response.data == {'message': 'Not found', 'documentation_url': CORE_REST_SETTINGS['DOCUMENTATION_URL']}

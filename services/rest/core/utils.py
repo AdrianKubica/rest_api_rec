@@ -1,5 +1,5 @@
 """
-SOME modeule description
+SOME module description
 """
 
 import logging
@@ -52,11 +52,4 @@ def custom_exception_handler(exception: APIException, context: Dict) -> Response
         'message': exception.default_detail,
         'documentation_url': CORE_REST_SETTINGS['DOCUMENTATION_URL'],
     }
-    # Catch all requests to inappropriate endpoints (directed to "DefaultView") and set 404 status code
-    # with "Not Found" message
-    if response.status_code == 404:
-        response = Response(data={"custom_key": "custom msg for 404 status code"})
-    if str(context['view']) == 'default':
-        response.status_code = 404
-        response.data['message'] = 'Not Found'
     return response
