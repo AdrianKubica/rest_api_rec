@@ -24,9 +24,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')  # '-^26!&88py4!ogzqv)isxhtl7_^m+-impj8ol99)(*!y39#0q*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DJANGO_DEBUG_MODE')
 
-ALLOWED_HOSTS = ['127.0.0.1', '192.168.99.100']  # You need also set appropriate value for allowed hosts
+PROFILE = os.environ.get('DJANGO_PRODUCTION_MODE', 'Dev')
+if PROFILE == 'Dev':
+    DEBUG = True
+else:
+    DEBUG = False
+
+
+ALLOWED_HOSTS = ['127.0.0.1', '192.168.99.100']  # You need set appropriate value for allowed hosts
 
 
 # Application definition
@@ -148,7 +154,7 @@ CORE_REST_SETTINGS = {
         'stargazers_count': 'stars',
         'created_at': 'createdAt',
     },
-    'DOCUMENTATION_URL': 'https://github.com/AdrianKubica/rest_api_rec',
+    'DOCUMENTATION_URL': 'https://rest-api-rec.readthedocs.io/en/latest',
 }
 
 # Configure logging messages

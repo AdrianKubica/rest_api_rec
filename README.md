@@ -27,7 +27,7 @@ There is also possibility to build and run development version with `docker-comp
 Development version consists:
 - testing environments: simply run `pytest` command using `rest` container, so you can run tests with following commands:
     - go to root project directory and run `build` command: `docker build -t adriankubica/rest_api -f ./services/rest/Dockerfile.dev ./services/rest`
-    - to check if tests are passing use `run` command: `docker run adriankubica/rest_api sh -c "flake8 && pytest && pytest --cov`
+    - to check if tests are passing use `run` command: `docker run adriankubica/rest_api sh -c "flake8 && pytest && pytest --cov"`
 `rest_api` uses `flake8` linter to check project consistency with PEP8: simply run `flake8` command using `rest` container.
 
 There is also TravisCI configuration for Github in `.travis.yml` file which is able to make integrity tests after each commit pushed to Github.
@@ -59,7 +59,7 @@ This project is able to make some trade-offs, consider following:
 - there is some security settings vulnerabilities which are simply put in Dockerfile.yaml / docker-compose.yaml files, its for example:
     - user accounts credentials (some user Github account is created for support this project and all credentials are typed in plain text in docker-compose.yaml)
     - database settings,
-    - django allowed hosts (you need to fill them according to security reasons),
+    - django ALLOWED_HOSTS (you need to fill that value in `services/rest/app/settings.py` file according to security reasons, otherwise at production you will get `Bad Request (400) Error`),
     - django security keys, django DEBUG MODE and so on
 - keep in mind that its risky to keep and send those information's to Github repository.
 

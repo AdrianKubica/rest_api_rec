@@ -10,7 +10,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.request import Request
 
 from app.settings import CORE_REST_SETTINGS
-from core.views import UserRepoView, other_endpoint
+from core.views import UserRepoView, not_found
 
 
 class ResponseMock(Response):
@@ -106,5 +106,5 @@ def test_user_repo_view_get(owner, repo_name, response_mock):
 def test_other_endpoint_view():
     request_factory = RequestFactory()
     request = request_factory.get('/path', data={'name': u'test'})
-    response = other_endpoint(request)
+    response = not_found(request)
     assert response.data == {'message': 'Not found', 'documentation_url': CORE_REST_SETTINGS['DOCUMENTATION_URL']}

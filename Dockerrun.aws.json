@@ -10,7 +10,7 @@
         },
         {
             "name": "redis",
-            "image": "adriankubica/rest-redis",
+            "image": "redis:latest",
             "hostname": "redis",
             "essential": true,
             "memory": 256

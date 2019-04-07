@@ -101,6 +101,6 @@ class UserRepoView(views.APIView):
 
 
 @api_view()
-def other_endpoint(request):
+def not_found(request):
     return Response({'message': 'Not found', 'documentation_url': CORE_REST_SETTINGS['DOCUMENTATION_URL']},
                     status=status.HTTP_404_NOT_FOUND)
