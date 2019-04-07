@@ -24,11 +24,20 @@ To run REST_API you simply need:
 installed and then: `docker-compose up --build -d` will build and run production ready service for you.
 There is also possibility to build and run development version with `docker-compose up -f docker-compose.dev.yaml --build -d`.
 Development version consists:
-- testing environments: simply run `pytest` command using `rest` container (currently 100% of tests coverage),
+- testing environments: simply run `pytest` command using `rest` container (currently 100% of tests coverage):
+    - git clone {rest_api repository}
+    - go to root project directory and run `build` command: `docker build -t adriankubica/rest_api -f ./services/rest/Dockerfile.dev ./services/rest`
+    - check if tests passing, use `run` command: `docker run adriankubica/rest_api sh -c "flake8 && pytest && pytest --cov`
 - linter to check project consistency with PEP8: simply run `flake8` command using `rest` container.
 
-There is also TravisCI configuration for Github which is able to make integrity tests after each commit pushed to Github.
-If integrity tests are correct, you can for example prepare production ready builds and send it to http://hub.docker/hub. 
+There is also TravisCI configuration for Github in `.travis.yml` file which is able to make integrity tests after each commit pushed to Github.
+If integrity tests passed, you can for example prepare production ready builds and send it to http://hub.docker/com.
+This repository contains also production ready flow configuration with:
+- github and TravisCI looking for new commits pushed to Github,
+- integration tests,
+- deployment with AWS Elastic Beanstalk under the hood if tests are successful.
+
+You can find working application at: <http://52.28.76.99/>   
 
 There is also much more options to run robust instances of this project.
 You can use for example: `AWS EC2`, `AWS Elastic Beanstalk`, `Docker Swarm`, `Kubernetes` and so on.
