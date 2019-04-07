@@ -5,8 +5,6 @@ services:
     build:
       context: ./services/nginx
     restart: always
-    volumes:
-      - ./services/rest/static:/static
     ports:
       - 80:80
     depends_on:

@@ -1,10 +1,11 @@
-FROM python:3.7
+FROM python:3.7-alpine
 LABEL maintainer="adrian.kubica.ak@gmail.com"
 
 ENV PYTHOUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
 
-RUN apt-get update
+RUN apk update
+RUN apk add --no-cache python3 python3-dev gcc musl-dev zlib-dev libffi-dev openssl-dev ca-certificates
 ENV TZ Europe/Warsaw
 
 ENV DJANGO_DEBUG_MODE True

@@ -13,7 +13,6 @@ sphinx = "*"
 [packages]
 django = "==2.2"
 djangorestframework = ">=3.9.2,<3.10.0"
-psycopg2-binary = "*"
 gunicorn = "*"
 gevent = "==1.4.0"
 requests = "*"

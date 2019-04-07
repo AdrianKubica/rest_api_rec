@@ -34,6 +34,10 @@ There is also much more options to run robust instances of this project.
 You can use for example: `AWS EC2`, `AWS Elastic Beanstalk`, `Docker Swarm`, `Kubernetes` and so on.
 If you need more resilience you should also consider load balancing for better UX and service reliability.
 
+Simply put:
+- docker-compose.yaml - stands for production ready service
+- docker-compose.dev.yaml - strands for development ready service
+
 
 Documentation
 -------------
@@ -46,12 +50,14 @@ Notes
 This project is able to make some trade-offs, consider following:
 - there is some security settings vulnerabilities which are simply put in Dockerfile.yaml / docker-compose.yaml files, its for example:
     - user accounts credentials (some user Github account is created for support this project and all credentials are typed in plain text in docker-compose.yaml)
-    - database settings
+    - database settings,
+    - django allowed hosts (you need to fill them according to security reasons),
     - django security keys and so on
 - keep in mind that its risky to keep and send those information's to Github repository.
 
 You should consider to use Host OS environment variables and load those variables to specific Dockerfiles with:
 `ENV VARIABLE_NAME ${VARIABLE_NAME}` syntax. In more complex project you should also consider to split your settings.py files for production and development environments.
+
 
 Questions:
 ----------

@@ -1,0 +1,33 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "rest",
+            "image": "adriankubica/rest-rest_api",
+            "hostname": "rest",
+            "essential": true,
+            "memory": 256
+        },
+        {
+            "name": "redis",
+            "image": "adriankubica/rest-redis",
+            "hostname": "redis",
+            "essential": true,
+            "memory": 256
+        },
+        {
+            "name": "nginx",
+            "image": "adriankubica/rest-nginx",
+            "hostname": "nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                "hostPort": 80,
+                "containerPort": 80
+                }
+            ],
+            "links": ["client", "server"],
+            "memory": 256
+        }
+    ]
+}
