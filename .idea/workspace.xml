@@ -6,9 +6,7 @@
     </enabled-run-configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4fc4a240-24d9-4bfa-b706-0365d1d9b0a8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/docs/source/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/index.rst" afterDir="false" />
-    </list>
+    <list default="true" id="4fc4a240-24d9-4bfa-b706-0365d1d9b0a8" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,31 +145,7 @@
               <item name="REST_API" type="b2602c69:ProjectViewProjectNode" />
               <item name="REST_API" type="462c0819:PsiDirectoryNode" />
               <item name="docs" type="462c0819:PsiDirectoryNode" />
-              <item name="build" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="REST_API" type="b2602c69:ProjectViewProjectNode" />
-              <item name="REST_API" type="462c0819:PsiDirectoryNode" />
-              <item name="docs" type="462c0819:PsiDirectoryNode" />
-              <item name="build" type="462c0819:PsiDirectoryNode" />
-              <item name="html" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="REST_API" type="b2602c69:ProjectViewProjectNode" />
-              <item name="REST_API" type="462c0819:PsiDirectoryNode" />
-              <item name="docs" type="462c0819:PsiDirectoryNode" />
               <item name="source" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="REST_API" type="b2602c69:ProjectViewProjectNode" />
-              <item name="REST_API" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="REST_API" type="b2602c69:ProjectViewProjectNode" />
-              <item name="REST_API" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
-              <item name="rest" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="REST_API" type="b2602c69:ProjectViewProjectNode" />
@@ -256,7 +230,7 @@
       <updated>1554384546674</updated>
       <workItem from="1554384548501" duration="253000" />
       <workItem from="1554384825851" duration="147354000" />
-      <workItem from="1554633538167" duration="1194000" />
+      <workItem from="1554633538167" duration="1710000" />
     </task>
     <servers />
   </component>
@@ -293,7 +267,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="148801000" />
+    <option name="totallyTimeSpent" value="149317000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -305,7 +279,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17217484" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
