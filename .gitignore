@@ -1,13 +1,5 @@
 # IDE specific files
-.vscode
 .idea
-
-# Access log production files
-services/nginx/logs/rest.access.log.gz
-services/app/__pycache__/*
-
-# Compiled files
-services/rest/app/__pycache__/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -45,6 +37,7 @@ MANIFEST
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
+logs/
 
 # Unit test / coverage reports
 htmlcov/
