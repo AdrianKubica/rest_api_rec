@@ -21,21 +21,21 @@ To run REST_API you simply need:
 - docker,
 - docker-compose
 
+
 installed and then: `docker-compose up --build -d` will build and run production ready service for you.
 There is also possibility to build and run development version with `docker-compose up -f docker-compose.dev.yaml --build -d`.
 Development version consists:
-- testing environments: simply run `pytest` command using `rest` container (currently 100% of tests coverage):
-    - git clone {rest_api repository}
+- testing environments: simply run `pytest` command using `rest` container, you can tun tests with following commands:
+    - git clone {rest_api repository},
     - go to root project directory and run `build` command: `docker build -t adriankubica/rest_api -f ./services/rest/Dockerfile.dev ./services/rest`
     - check if tests passing, use `run` command: `docker run adriankubica/rest_api sh -c "flake8 && pytest && pytest --cov`
 - linter to check project consistency with PEP8: simply run `flake8` command using `rest` container.
 
 There is also TravisCI configuration for Github in `.travis.yml` file which is able to make integrity tests after each commit pushed to Github.
-If integrity tests passed, you can for example prepare production ready builds and send it to http://hub.docker/com.
+If integrity tests passed, you can for example prepare production ready builds and push it to http://hub.docker/com.
 This repository contains also production ready flow configuration with:
-- github and TravisCI looking for new commits pushed to Github,
-- integration tests,
-- deployment with AWS Elastic Beanstalk under the hood if tests are successful.
+- Github and TravisCI looking for new commits pushed to Github repository,
+- integration tests, if passed then docker builds images are pushed to http://hub.docker/com.
 
 You can find working application at: <http://52.28.76.99/>   
 

@@ -14,23 +14,8 @@ script:
 after_success:
   - docker build -t adriankubica/rest-rest_api ./services/rest
   - docker build -t adriankubica/rest-nginx ./services/nginx
-  - docker build -t adriankubica/rest-redis ./services/redis
   # Log in to the docker CLI
   - docker login -u "$DOCKER_ID" -p "$DOCKER_PASSWORD"
   # Take thos images and push them to docker hub
   - docker push adriankubica/rest-rest_api
   - docker push adriankubica/rest-nginx
-  - docker push adriankubica/rest-redis
-
-deploy:
-  provider: elasticbeanstalk
-  region: eu-central-1
-  app: rest_api
-  env: RestApi-env
-  bucket_name: elasticbeanstalk-eu-central-1-844735237674
-  bucket_path: rest_api
-  on:
-    branch: master
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key:
-    secure: $AWS_SECRET_KEY
