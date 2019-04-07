@@ -7,10 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4fc4a240-24d9-4bfa-b706-0365d1d9b0a8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/nginx/logs/rest.access.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/services/nginx/logs/rest.access.log.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/rest/Pipfile" beforeDir="false" afterPath="$PROJECT_DIR$/services/rest/Pipfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/rest/Pipfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/services/rest/Pipfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/index.rst" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -120,8 +117,8 @@
         <option value="$PROJECT_DIR$/services/rest/core/urls.py" />
         <option value="$PROJECT_DIR$/docs/source/conf.py" />
         <option value="$PROJECT_DIR$/docs/source/help.rst" />
-        <option value="$PROJECT_DIR$/docs/source/index.rst" />
         <option value="$PROJECT_DIR$/docs/source/license.rst" />
+        <option value="$PROJECT_DIR$/docs/source/index.rst" />
       </list>
     </option>
   </component>
@@ -259,7 +256,7 @@
       <updated>1554384546674</updated>
       <workItem from="1554384548501" duration="253000" />
       <workItem from="1554384825851" duration="147354000" />
-      <workItem from="1554633538167" duration="1043000" />
+      <workItem from="1554633538167" duration="1194000" />
     </task>
     <servers />
   </component>
@@ -296,7 +293,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="148650000" />
+    <option name="totallyTimeSpent" value="148801000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">

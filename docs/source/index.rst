@@ -10,7 +10,6 @@ This is very interesting stuff.
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
    license
    help
