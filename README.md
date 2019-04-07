@@ -32,6 +32,7 @@ If integrity tests are correct, you can for example prepare production ready bui
 
 There is also much more options to run robust instances of this project.
 You can use for example: `AWS EC2`, `AWS Elastic Beanstalk`, `Docker Swarm`, `Kubernetes` and so on.
+If you need more resilience you should also consider load balancing for better UX and reliability.
 
 
 Documentation

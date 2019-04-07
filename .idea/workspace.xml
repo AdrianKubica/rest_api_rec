@@ -31,11 +31,18 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="448">
-                <caret line="54" column="10" lean-forward="true" selection-start-line="54" selection-start-column="10" selection-end-line="54" selection-end-column="10" />
+              <first_editor relative-caret-position="261">
+                <caret line="34" column="98" selection-start-line="34" selection-start-column="98" selection-end-line="34" selection-end-column="98" />
               </first_editor>
               <second_editor />
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-153" />
           </provider>
         </entry>
       </file>
@@ -242,7 +249,7 @@
       <updated>1554384546674</updated>
       <workItem from="1554384548501" duration="253000" />
       <workItem from="1554384825851" duration="147354000" />
-      <workItem from="1554633538167" duration="7454000" />
+      <workItem from="1554633538167" duration="7843000" />
     </task>
     <servers />
   </component>
@@ -279,7 +286,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="155061000" />
+    <option name="totallyTimeSpent" value="155450000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -345,7 +352,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/services/rest/config.cfg" />
     <entry file="file://$PROJECT_DIR$/services/rest/app/wsgi.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -650,11 +656,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-153" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="448">
-            <caret line="54" column="10" lean-forward="true" selection-start-line="54" selection-start-column="10" selection-end-line="54" selection-end-column="10" />
+          <first_editor relative-caret-position="261">
+            <caret line="34" column="98" selection-start-line="34" selection-start-column="98" selection-end-line="34" selection-end-column="98" />
           </first_editor>
           <second_editor />
         </state>
