@@ -10,5 +10,5 @@ from core.views import UserRepoView, DefaultView
 urlpatterns = [
     # path('api-auth/', include('rest_framework.urls')),
     path('repositories/<owner>/<repo_name>', UserRepoView.as_view(), name='repo'),
-    re_path('.*', DefaultView.as_view(), name='default'),
+    # re_path('.*', DefaultView.as_view(), name='default'),
 ]
