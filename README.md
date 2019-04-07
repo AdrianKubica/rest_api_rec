@@ -9,6 +9,10 @@ You can simply run this project with `docker-compose`:
 >>> docker-compose up --build -d
 ```
 
+Then go to HOST IP address and try to retrieve user repository information using following endpoint:
+`/repositories/{owner}/{repository-name}`. Replace `{owner}` and `{respository-name}` with appropriate values for truly existing user repository.
+
+
 Installation
 ------------
 
