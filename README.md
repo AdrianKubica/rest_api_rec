@@ -16,28 +16,27 @@ Then go to your HOST IP address and retrieve user repository information using f
 Installation
 ------------
 
-To run REST_API you simply need:
+To run REST_API you simply need to install:
 
+- git (to clone rest_api repository files),
 - docker,
-- docker-compose
+- docker-compose (to spawn containers).
 
-
-installed and then: `docker-compose up --build -d` will build and run production ready service for you.
+Then run `docker-compose up --build -d` command to build and run production ready service for you.
 There is also possibility to build and run development version with `docker-compose up -f docker-compose.dev.yaml --build -d`.
 Development version consists:
-- testing environments: simply run `pytest` command using `rest` container, you can tun tests with following commands:
-    - git clone {rest_api repository},
+- testing environments: simply run `pytest` command using `rest` container, so you can run tests with following commands:
     - go to root project directory and run `build` command: `docker build -t adriankubica/rest_api -f ./services/rest/Dockerfile.dev ./services/rest`
-    - check if tests passing, use `run` command: `docker run adriankubica/rest_api sh -c "flake8 && pytest && pytest --cov`
-- linter to check project consistency with PEP8: simply run `flake8` command using `rest` container.
+    - to check if tests are passing use `run` command: `docker run adriankubica/rest_api sh -c "flake8 && pytest && pytest --cov`
+`rest_api` uses `flake8` linter to check project consistency with PEP8: simply run `flake8` command using `rest` container.
 
 There is also TravisCI configuration for Github in `.travis.yml` file which is able to make integrity tests after each commit pushed to Github.
 If integrity tests passed, you can for example prepare production ready builds and push it to http://hub.docker/com.
 This repository contains also production ready flow configuration with:
-- Github and TravisCI looking for new commits pushed to Github repository,
-- integration tests, if passed then docker builds images are pushed to http://hub.docker/com.
+- Github and TravisCI which looks for new commits pushed to Github repository,
+- integration tests, if passed then docker builds images and push them to http://hub.docker/com.
 
-You can find working application at: <http://52.28.76.99/>   
+You can find working application at: <http://3.120.32.14/repositories/kennethreitz/requests>   
 
 There is also much more options to run robust instances of this project.
 You can use for example: `AWS EC2`, `AWS Elastic Beanstalk`, `Docker Swarm`, `Kubernetes` and so on.
@@ -45,7 +44,7 @@ If you need more resilience you should also consider load balancing for better U
 
 Simply put:
 - docker-compose.yaml - stands for production ready service
-- docker-compose.dev.yaml - strands for development ready service
+- docker-compose.dev.yaml - stands for development ready service
 
 
 Documentation
@@ -61,7 +60,7 @@ This project is able to make some trade-offs, consider following:
     - user accounts credentials (some user Github account is created for support this project and all credentials are typed in plain text in docker-compose.yaml)
     - database settings,
     - django allowed hosts (you need to fill them according to security reasons),
-    - django security keys and so on
+    - django security keys, django DEBUG MODE and so on
 - keep in mind that its risky to keep and send those information's to Github repository.
 
 You should consider to use Host OS environment variables and load those variables to specific Dockerfiles with:
