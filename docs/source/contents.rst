@@ -1,0 +1,8 @@
+REST_API Contents
+=================
+
+.. toctree::
+   :maxdepth: 2
+
+   license
+   help

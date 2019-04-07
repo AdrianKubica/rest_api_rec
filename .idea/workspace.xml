@@ -28,14 +28,19 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/services/rest/core/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1428">
+            <state relative-caret-position="429">
               <caret line="100" selection-start-line="100" selection-end-line="100" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/source/index.rst">
+          <provider selected="true" editor-type-id="restructured-text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/docs/source/contents.rst">
           <provider selected="true" editor-type-id="restructured-text-editor" />
         </entry>
       </file>
@@ -117,6 +122,7 @@
         <option value="$PROJECT_DIR$/docs/source/help.rst" />
         <option value="$PROJECT_DIR$/docs/source/license.rst" />
         <option value="$PROJECT_DIR$/docs/source/index.rst" />
+        <option value="$PROJECT_DIR$/docs/source/contents.rst" />
       </list>
     </option>
   </component>
@@ -230,7 +236,7 @@
       <updated>1554384546674</updated>
       <workItem from="1554384548501" duration="253000" />
       <workItem from="1554384825851" duration="147354000" />
-      <workItem from="1554633538167" duration="1710000" />
+      <workItem from="1554633538167" duration="1989000" />
     </task>
     <servers />
   </component>
@@ -267,7 +273,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="149317000" />
+    <option name="totallyTimeSpent" value="149596000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -279,8 +285,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17217484" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17217484" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -294,7 +301,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32950193" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053304" side_tool="true" weight="0.32950193" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.36302683" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.36302683" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.27203065" />
       <window_info anchor="right" id="Coverage" order="0" sideWeight="0.50142854" side_tool="true" weight="0.18496802" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
@@ -332,9 +339,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/services/rest/core/tests/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/services/rest/.coverage" />
     <entry file="file://$PROJECT_DIR$/services/rest/core/tests/url_test.py" />
     <entry file="file://$PROJECT_DIR$/services/rest/core/tests/apps_test.py" />
@@ -607,13 +611,6 @@
     <entry file="file://$PROJECT_DIR$/docs/build/html/index.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/services/rest/core/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1428">
-          <caret line="100" selection-start-line="100" selection-end-line="100" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/docs/source/help.rst">
       <provider selected="true" editor-type-id="restructured-text-editor" />
     </entry>
@@ -627,7 +624,17 @@
     <entry file="file://$PROJECT_DIR$/docs/source/license.rst">
       <provider selected="true" editor-type-id="restructured-text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/services/rest/core/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="429">
+          <caret line="100" selection-start-line="100" selection-end-line="100" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/docs/source/index.rst">
+      <provider selected="true" editor-type-id="restructured-text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/source/contents.rst">
       <provider selected="true" editor-type-id="restructured-text-editor" />
     </entry>
   </component>
