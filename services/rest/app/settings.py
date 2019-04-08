@@ -121,7 +121,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # Django REST Framework settings
 
 REST_FRAMEWORK = {
-    'EXCEPTION_HANDLER': 'core.utils.custom_exception_handler'
+    'EXCEPTION_HANDLER': 'core.utils.custom_exception_handler',
+    'DEFAULT_RENDERER_CLASSES': (
+         'rest_framework.renderers.JSONRenderer',
+     )
 }
 
 # Redis Cache settings

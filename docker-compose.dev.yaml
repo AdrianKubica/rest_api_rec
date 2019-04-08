@@ -21,6 +21,7 @@ services:
     build:
       dockerfile: Dockerfile.dev
       context: ./services/rest
+    restart: always
     volumes:
       - ./services/rest:/rest
     environment:
