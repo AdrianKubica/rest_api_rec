@@ -14,8 +14,8 @@ script:
 after_success:
   - docker build -t adriankubica/rest-rest_api ./services/rest
   - docker build -t adriankubica/rest-nginx ./services/nginx
-  # Log in to the docker CLI
+  # Log in to the docker hub
   - docker login -u "$DOCKER_ID" -p "$DOCKER_PASSWORD"
-  # Take thos images and push them to docker hub
+  # Take those images and push them to docker hub
   - docker push adriankubica/rest-rest_api
   - docker push adriankubica/rest-nginx

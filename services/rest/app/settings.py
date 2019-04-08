@@ -25,11 +25,13 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')  # '-^26!&88py4!ogzqv)isxhtl7_^m+-im
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-PROFILE = os.environ.get('DJANGO_PRODUCTION_MODE', 'Dev')
-if PROFILE == 'Dev':
-    DEBUG = True
-else:
-    DEBUG = False
+# PROFILE = os.environ.get('DJANGO_PRODUCTION_MODE', 'Dev')
+# if PROFILE == 'Dev':
+#     DEBUG = True
+# else:
+#     DEBUG = False
+
+DEBUG = os.environ.get('DJANGO_PRODUCTION_MODE', False)
 
 
 ALLOWED_HOSTS = ['127.0.0.1', '192.168.99.100']  # You need set appropriate value for allowed hosts
