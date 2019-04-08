@@ -1,5 +1,14 @@
 """
-SOME module description
+Utils module contains helper functions for core application such as:
+    - user authentication,
+    - data filtering,
+    - custom error handler
+
+FUNCTIONS:
+    - get_auth
+    - get_fields
+    - custom_exception_handler
+
 """
 
 import logging
@@ -17,12 +26,13 @@ logger = logging.getLogger(__name__)
 
 def get_auth() -> HTTPBasicAuth:
     """
-    Helper function creates HTTPBasicAuth object for requests library authentication
+    Helper function creates HTTPBasicAuth object for requests library authentication.
+    You can extend this method in the future to support other forms of authentication.
 
     :return: Requests library HTTPBasicAuth object
     :rtype: HTTPBasicAuth
     """
-    # Create HTTBasicAuth object from requests library
+    # Create HTTBasicAuth object from requests library to support authentication
     auth = HTTPBasicAuth(username=CORE_REST_SETTINGS['CREDENTIALS']['USER_NAME'],
                          password=CORE_REST_SETTINGS['CREDENTIALS']['USER_PASSWORD'])
     return auth
@@ -30,7 +40,7 @@ def get_auth() -> HTTPBasicAuth:
 
 def get_fields(repo_data: Dict, repo_fields: Dict) -> Dict:
     """
-    Helper function selects proprietary fields from repo_data param and handling name transition
+    Helper function selects proprietary fields from repo_data param and handles simple name transition
     from snake_case to camelCase
 
     :param repo_data: Initial data to be filtered
@@ -45,9 +55,20 @@ def get_fields(repo_data: Dict, repo_fields: Dict) -> Dict:
 
 
 def custom_exception_handler(exception: APIException, context: Dict) -> Response:
-    # Call REST framework's default exception handler first, to get the standard error response.
+    """
+    Exception handler for all errors raised by Django Rest Framework. This function captures all errors
+    from each endpoint of application.
+
+    :param exception: APIException error captured by Django Rest Framework
+    :type exception: Dict
+    :param context: Context with information's about view which raised an error and context variables.
+    :type context: Dict
+    :return: Response data for client application
+    :rtype: Dict
+    """
+    # Call framework's default exception_handler function to get information's about error response data
     response = views.exception_handler(exception, context)
-    # Update and add documentation_url data field for clients response
+    # Update and add documentation_url field to client response
     response.data = {
         'message': exception.default_detail,
         'documentation_url': CORE_REST_SETTINGS['DOCUMENTATION_URL'],

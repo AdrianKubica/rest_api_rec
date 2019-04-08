@@ -1,6 +1,6 @@
-Core Views
+Core Utils
 ----------
 
-.. automodule:: core.views
+.. automodule:: core.utils
     :members:
     :show-inheritance:
