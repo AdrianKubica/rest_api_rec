@@ -45,6 +45,9 @@ Development environment consists:
     - to check if tests are passing use `run` command: `docker run adriankubica/rest_api sh -c "flake8 && pytest && pytest --cov"`
 `rest_api` uses `flake8` linter to check project consistency with PEP8: simply run `flake8` command using `rest` container.
 
+
+You can also use your IDE ability to run automated tests.
+
 There is also TravisCI configuration for Github in `.travis.yml` file which is able to make integrity tests after each commit pushed to Github.
 If integrity tests passed, you can for example prepare production ready builds and push it to http://hub.docker/com.
 Production ready flow configuration cooperate with:

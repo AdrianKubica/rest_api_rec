@@ -9,3 +9,4 @@ Next to check if tests are passing, use command:
 This application uses ``flake8`` linter to check project consistency with PEP8 and ``pytest`` for units tests.
 You can simply run ``flake8`` command and ``pytest`` command inside development ``rest`` container.
 
+You can also use your IDE ability to run automated tests.
