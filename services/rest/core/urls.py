@@ -1,5 +1,8 @@
 """
 Urls module is responsible for all application endpoints configuration.
+
+Args:
+    - urlpatterns (List): List of endpoints for REST application
 """
 
 from django.urls import path, re_path

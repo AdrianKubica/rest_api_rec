@@ -1,11 +1,11 @@
 REST API Contents
 =================
 
-This part of documentation includes information's about core application code.
+This part of documentation includes information's about installation process and application code documentation.
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 5
 
-   core_views
-   core_utils
+   installation
+   code_documentation

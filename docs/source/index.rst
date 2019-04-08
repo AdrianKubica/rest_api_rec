@@ -19,7 +19,7 @@ Dont forget to fill ALLOWED_HOSTS in services/rest/app/settings.py file accordin
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 5
    :caption: Contents:
 
    contents
