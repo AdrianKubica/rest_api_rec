@@ -1,6 +1,5 @@
 """
 Apps module is responsible for all required application configuration
-
 """
 
 from django.apps import AppConfig

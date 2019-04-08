@@ -1,6 +1,5 @@
 """
 Serializers module is responsible for data serialization
-
 """
 
 from rest_framework import serializers

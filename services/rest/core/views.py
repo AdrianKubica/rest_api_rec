@@ -1,7 +1,6 @@
 """
 Views module handles HTTP methods for REST API. Currently there is only one HTTP GET method allowed, which stands for
 read-only access for all endpoints of this application.
-
 """
 
 import logging
@@ -31,7 +30,6 @@ logger = logging.getLogger(__name__)
 class UserRepoView(views.APIView):
     """
     UserRepoView handles each request directed to endpoint: /repositories/{owner}/{repo_name}
-
     """
     serializer_class: UserRepoSerializer = UserRepoSerializer
 
@@ -51,7 +49,6 @@ class UserRepoView(views.APIView):
         :return: Django Rest Framework Response object with data from Github API. This response is send back to client
         application
         :rtype: Django Rest Framework Response
-
         """
 
         # Create session adapter with retry connection attribute
@@ -124,7 +121,6 @@ def not_found(request: Request) -> Response:
     :return: Django Rest Framework Response object with predefined data for 404 Not Found Error. This response is
     send back to client application.
     :rtype: Django Rest Framework Response
-
     """
 
     return Response({'message': 'Not found', 'documentation_url': CORE_REST_SETTINGS['DOCUMENTATION_URL']},

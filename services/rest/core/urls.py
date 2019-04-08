@@ -1,6 +1,5 @@
 """
 Urls module is responsible for all application endpoints configuration.
-
 """
 
 from django.urls import path, re_path
