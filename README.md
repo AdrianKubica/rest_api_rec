@@ -5,11 +5,11 @@ REST API project is released to consume particular endpoint from http://api.gith
 This project is responsible for retrieve information about specified Github user repository.
 
 REST API includes:
-    - Production ready environment including dedicated docker and docker-compose,
-    - Development environment including dedicated docker and docker-compose,
-    - Easy to run tests with `flake8` linter and `pytest` for units testing,
-    - Integration test with Github and TravisCI configuration - if tests are passed docker images are pushed to docker hub,
-    - Caching abilities with Redis.
+- Production ready environment including dedicated docker and docker-compose,
+- Development environment including dedicated docker and docker-compose,
+- Easy to run tests with `flake8` linter and `pytest` for units testing,
+- Integration test with Github and TravisCI configuration - if tests are passed docker images are pushed to docker hub,
+- Caching abilities with Redis.
 
 You can run this project with `docker-compose`:
 ``` 
@@ -25,8 +25,8 @@ You can find working application at: http://3.120.32.14/repositories/kennethreit
 
 
 Simply put:
-    - `docker-compose.yaml` - stands for production ready service
-    - `docker-compose.dev.yaml` - stands for development ready service
+- `docker-compose.yaml` - stands for production ready service
+- `docker-compose.dev.yaml` - stands for development ready service
 
 Installation
 ------------
