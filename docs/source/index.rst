@@ -7,6 +7,13 @@ Quick start
 REST API project is released to consume particular endpoint from http://api.github.com.
 This project is responsible for retrieve information about specified Github user repository.
 
+REST API includes:
+    - Production ready environment,
+    - Development environment,
+    - Easy to run tests with ``flake8`` linter and ``pytest`` for units testing,
+    - Integration test with Github and TravisCI configuration - if tests are passed docker images are pushed to docker hub,
+    - Caching abilities with Redis.
+
 You can simply run this project with docker-compose:
 
 >>> docker-compose up --build -d
