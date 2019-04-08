@@ -10,4 +10,6 @@ This part of documentation includes information's about installation process and
    installation
    running_application
    testing
+   integration_test
    code_documentation
+   notes

@@ -5,13 +5,13 @@ REST API project is released to consume particular endpoint from http://api.gith
 This project is responsible for retrieve information about specified Github user repository.
 
 REST API includes:
-    - Production ready environment,
-    - Development environment,
+    - Production ready environment including dedicated docker and docker-compose,
+    - Development environment including dedicated docker and docker-compose,
     - Easy to run tests with `flake8` linter and `pytest` for units testing,
     - Integration test with Github and TravisCI configuration - if tests are passed docker images are pushed to docker hub,
     - Caching abilities with Redis.
 
-You can simply run this project with `docker-compose`:
+You can run this project with `docker-compose`:
 ``` 
 >>> docker-compose up --build -d
 ```
@@ -21,11 +21,17 @@ Then go to your HOST IP address and retrieve user repository information using f
 Dont forget to fill ALLOWED_HOSTS setting in `services/rest/app/settings.py` file according to security reasons, otherwise at production environment you will get `Bad Request (400) Error`).
 
 
+You can find working application at: http://3.120.32.14/repositories/kennethreitz/requests
+
+
+Simply put:
+    - `docker-compose.yaml` - stands for production ready service
+    - `docker-compose.dev.yaml` - stands for development ready service
 
 Installation
 ------------
 
-To run REST_API you simply need to install:
+To run REST_API you simply need to install (check documentation for more details at <https://rest-api-rec.readthedocs.io/en/latest>):
 
 - git (to get `rest_api` repository files),
 - docker,
@@ -41,20 +47,14 @@ Development environment consists:
 
 There is also TravisCI configuration for Github in `.travis.yml` file which is able to make integrity tests after each commit pushed to Github.
 If integrity tests passed, you can for example prepare production ready builds and push it to http://hub.docker/com.
-This repository contains also production ready flow configuration with:
+Production ready flow configuration cooperate with:
 - Github,
 - TravisCI which looks for new commits pushed to Github repository,
 - integration tests, if passed then docker builds images and push them to http://hub.docker/com.
 
-You can find working application at: <http://3.120.32.14/repositories/kennethreitz/requests>   
-
 There is also much more options to run robust instances of this project.
 You can use for example: `AWS EC2`, `AWS Elastic Beanstalk`, `Docker Swarm`, `Kubernetes` and so on.
 If you need more resilience you should also consider load balancing for better UX and service reliability.
-
-Simply put:
-- docker-compose.yaml - stands for production ready service
-- docker-compose.dev.yaml - stands for development ready service
 
 
 Documentation
