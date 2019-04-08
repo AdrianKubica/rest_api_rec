@@ -6,7 +6,6 @@ ENV PYTHOUNBUFFERED 1
 RUN apt-get update
 ENV TZ Europe/Warsaw
 
-ENV DJANGO_PRODUCTION_MODE PRODUCTION_MODE
 ENV DJANGO_SECRET_KEY -^26!&88py4!ogzqv)isxhtl7_^m+-impj8ol99)(*!y39#0q*
 
 WORKDIR /rest
