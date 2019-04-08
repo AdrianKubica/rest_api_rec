@@ -12,7 +12,8 @@ REST API includes:
     - Development environment including dedicated docker and docker-compose,
     - Easy to run tests with ``flake8`` linter and ``pytest`` for units testing,
     - Integration test with Github and TravisCI configuration - if tests are passed docker images are pushed to docker hub,
-    - Caching abilities with Redis.
+    - Caching abilities with Redis,
+    - Gunicorn configuration.
 
 You can run this project with docker-compose:
 
