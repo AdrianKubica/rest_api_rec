@@ -1,6 +1,9 @@
 REST_API
 ========
 
+Quick start
+-----------
+
 REST API project is released to consume particular endpoint from http://api.github.com.
 This project is responsible for retrieve information about specified Github user repository.
 
