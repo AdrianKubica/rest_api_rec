@@ -1,5 +1,5 @@
 """
-This module handles HTTP methods for REST API. Currently there is only one HTTP GET method allowed, which stands for
+Views module handles HTTP methods for REST API. Currently there is only one HTTP GET method allowed, which stands for
 read-only access for all endpoints of this application.
 
 """
@@ -30,9 +30,7 @@ logger = logging.getLogger(__name__)
 
 class UserRepoView(views.APIView):
     """
-    UserRepoView handles each request directed to endpoint:
-
-    /repositories/{owner}/{repo_name}
+    UserRepoView handles each request directed to endpoint: /repositories/{owner}/{repo_name}
 
     """
     serializer_class: UserRepoSerializer = UserRepoSerializer

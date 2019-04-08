@@ -1,9 +1,14 @@
+"""
+Serializers module is responsible for data serialization
+
+"""
+
 from rest_framework import serializers
 
 
 class UserRepoSerializer(serializers.Serializer):
     """
-    UserRepoSerializer is responsible for creation serialized version of data object
+    UserRepoSerializer is responsible for preparation of serialized version data object
     """
     fullName: str = serializers.CharField(read_only=True)
     description: str = serializers.CharField(read_only=True)

@@ -4,11 +4,6 @@ Utils module contains helper functions for core application such as:
     - data filtering,
     - custom error handler
 
-FUNCTIONS:
-    - get_auth
-    - get_fields
-    - custom_exception_handler
-
 """
 
 import logging
