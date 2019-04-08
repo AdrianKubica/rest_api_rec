@@ -1,5 +1,7 @@
 """
-Some module comments
+This module handles HTTP methods for REST API. Currently there is only one HTTP GET method allowed, which stands for
+read-only access for all endpoints of this application.
+
 """
 
 import logging
@@ -28,15 +30,19 @@ logger = logging.getLogger(__name__)
 
 class UserRepoView(views.APIView):
     """
-    UserRepoView handles each request directed to endpoint '/repositories/<owner>/<repo_name>
+    UserRepoView handles each request directed to endpoint:
+
+    /repositories/{owner}/{repo_name}
+
     """
     serializer_class: UserRepoSerializer = UserRepoSerializer
 
-    @method_decorator(cache_page(CACHE_TTL))
-    @method_decorator(vary_on_cookie)  # for security reasons stick cache to appropriate session
+    @method_decorator(cache_page(CACHE_TTL))  # set cache for this method responses
+    @method_decorator(vary_on_cookie)  # for security reason sticks cache to appropriate session
     def get(self, request: Request, owner: str, repo_name: str) -> Response:
         """
-        UserRepoView get method handles HTTP GET request and return DRF (application/json) response to client
+        UserRepoView "GET" method handles HTTP GET request and return Django Rest Framework (application/json)
+        response to client
 
         :param request: Client HTTP request directed to UserRepoView
         :type request: Request object
@@ -44,10 +50,10 @@ class UserRepoView(views.APIView):
         :type owner: str
         :param repo_name: Stands for repository name we are looking for
         :type repo_name: str
-        :return: DRF Response object with data from Github API. This response is send back to client application
-        :rtype: DRF Response
+        :return: Django Rest Framework Response object with data from Github API. This response is send back to client
+        application
+        :rtype: Django Rest Framework Response
         """
-        logger.error('You hit github api')
 
         # Create session adapter with retry connection attribute0
         http_adapter = HTTPAdapter(max_retries=3)
@@ -102,5 +108,10 @@ class UserRepoView(views.APIView):
 
 @api_view()
 def not_found(request):
+    """
+    This view handles each request which is not directed for any other view in application. Its responsible for
+    returning user friendly Not Found message in JSON format and 404 HTTP status code.
+
+    """
     return Response({'message': 'Not found', 'documentation_url': CORE_REST_SETTINGS['DOCUMENTATION_URL']},
                     status=status.HTTP_404_NOT_FOUND)
