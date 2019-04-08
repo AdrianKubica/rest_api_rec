@@ -8,3 +8,4 @@ This part of documentation includes information's about core application code.
    :maxdepth: 2
 
    core_views
+   core_utils

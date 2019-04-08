@@ -53,6 +53,7 @@ class UserRepoView(views.APIView):
         :return: Django Rest Framework Response object with data from Github API. This response is send back to client
         application
         :rtype: Django Rest Framework Response
+
         """
 
         # Create session adapter with retry connection attribute
@@ -125,6 +126,7 @@ def not_found(request: Request) -> Response:
     :return: Django Rest Framework Response object with predefined data for 404 Not Found Error. This response is
     send back to client application.
     :rtype: Django Rest Framework Response
+
     """
 
     return Response({'message': 'Not found', 'documentation_url': CORE_REST_SETTINGS['DOCUMENTATION_URL']},
