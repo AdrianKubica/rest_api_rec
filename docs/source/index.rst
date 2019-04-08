@@ -1,5 +1,5 @@
-Welcome to REST_API project documentation
-============================================
+Welcome to REST API documentation
+=================================
 
 Guide
 ^^^^^
@@ -10,11 +10,15 @@ This is very interesting stuff.
 
 .. toctree::
    :maxdepth: 2
+   :caption: Contents:
 
+   contents
+   core_views
    license
    help
 
-
+Test
+----
 
 Indices and tables
 ^^^^^^^^^^^^^^^^^^

@@ -2,19 +2,22 @@ sudo: required
 services:
   - docker
 
+# Configuration for slack notifications describing build status
 notifications:
-  slack: privateuser-workspace:5hybgvvnXJOVAuc01WiKfrmX # for slack notifications describing build status
+  slack: privateuser-workspace:5hybgvvnXJOVAuc01WiKfrmX
 
+# Build image for automated integration tests
 before_install:
-  - docker build -t adriankubica/rest_api -f ./services/rest/Dockerfile.dev ./services/rest # run integration tests while repository is pushed to Github
+  - docker build -t adriankubica/rest_api -f ./services/rest/Dockerfile.dev ./services/rest
 
+# Run integration tests when repository is pushed to Github
 script:
   - docker run adriankubica/rest_api sh -c "flake8 && pytest && pytest --cov"
 
 after_success:
   - docker build -t adriankubica/rest-rest_api ./services/rest
   - docker build -t adriankubica/rest-nginx ./services/nginx
-  # Log in to the docker hub
+  # Login to the docker hub
   - docker login -u "$DOCKER_ID" -p "$DOCKER_PASSWORD"
   # Take those images and push them to docker hub
   - docker push adriankubica/rest-rest_api

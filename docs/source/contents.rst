@@ -1,4 +1,4 @@
-REST_API Contents
+REST API Contents
 =================
 
 .. toctree::
