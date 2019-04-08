@@ -9,7 +9,7 @@ from core.utils import get_fields, custom_exception_handler
 
 @pytest.fixture(autouse=True)
 def no_requests(monkeypatch):
-    """Switch off possibilities to send requests"""
+    """This fixture switch off possibilities to send requests by requests library"""
     monkeypatch.delattr('requests.sessions.Session.request')
 
 
@@ -21,11 +21,16 @@ def no_requests(monkeypatch):
     ({'a': 10, 'b': 20}, {}, {}),
 ))
 def test_get_fields(repo_data, repo_fields, expected):
+    """This function tests if get_fields helper function makes proper fields transition for dict inputs"""
     filtered_data = get_fields(repo_data, repo_fields)
     assert filtered_data == expected
 
 
 class ExceptionMock:
+    """
+    This is Exception Mock class for testing custom_exception_handler function. This function is used for capturing
+    exceptions in REST API
+    """
     def __init__(self, load_attr):
         self.__dict__.update(load_attr)
 
@@ -47,17 +52,22 @@ class ExceptionMock:
     },
 ])
 def exc_handler_mock(request):
+    """This fixture is responsible for instantiation ExceptionMock class with testing parameters"""
     exc_handler_mock = ExceptionMock(request.param)
     return exc_handler_mock
 
 
 def test_custom_exception_handler(exc_handler_mock):
+    """
+    This function tests custom_exception_handler function and uses parametrized fixture object from
+    exc_handler_mock. Function checks if returned values (exception.default_detail) match expected values and also if
+    response object has appropriate keys such as: 'message' and 'documentation_url'.
+    """
     views.exception_handler = Mock()
     views.exception_handler.return_value = exc_handler_mock
 
     response = custom_exception_handler(exc_handler_mock.exception, exc_handler_mock.context)
 
     assert response.data == exc_handler_mock['expected']['data']
-    assert hasattr(response, 'data')
     assert 'message' in response.data.keys()
     assert 'documentation_url' in response.data.keys()

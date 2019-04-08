@@ -5,4 +5,4 @@ There is also TravisCI configuration for Github in .travis.yml file which is abl
 Production ready flow configuration cooperate with:
     - Github,
     - TravisCI which looks for new commits pushed to Github repository,
-    - integration tests, if passed then docker builds images and push them to http://hub.docker/com.
+    - integration tests, if passed then TravisCI builds images and push them to http://hub.docker/com.

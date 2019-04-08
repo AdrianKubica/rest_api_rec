@@ -13,7 +13,14 @@ from app.settings import CORE_REST_SETTINGS
 from core.views import UserRepoView, not_found
 
 
+@pytest.fixture(autouse=True)
+def no_requests(monkeypatch):
+    """This fixture switch off possibilities to send requests by requests library"""
+    monkeypatch.delattr('requests.sessions.Session.request')
+
+
 class ResponseMock(Response):
+    """This class is responsible for mocking response object from Session.get used in views.UserRepoView.get method"""
     def __init__(self, status_code, result, expected, raise_error=None):
         super().__init__()
         self.status_code = status_code
@@ -24,22 +31,22 @@ class ResponseMock(Response):
         self.url = ''
 
     def json(self):
+        """This method imitates response.json() method from requests library"""
         return self.result
 
     def raise_for_status(self):
+        """This method imitates response.raise_for_status() method from requests library. If self.raise_error is set
+        to some Error Class it can raise proper Exception. This allows to test for example ConnectionError
+        and Timeout Error"""
         if self.raise_error:
             raise self.raise_error
         super().raise_for_status()
 
 
 class RequestMock(Request):
+    """This class imitates Request object when testing views.UserRepoView.get method"""
     def __init__(self):
         self.method = ''
-
-
-@pytest.fixture(autouse=True)
-def no_requests(monkeypatch):
-    monkeypatch.delattr('requests.sessions.Session.request')
 
 
 @pytest.fixture(params=[
@@ -67,6 +74,8 @@ def no_requests(monkeypatch):
 ])
 def response_mock(request):
     """
+    This fixtures parametrize ResponseMock object when testing views.UserRepoView.get method
+
     :param param[0]: Stands for HTTP status code
     :param param[1]: Stands for results of data res.json() call
     :param param[2]: Stands for expected data
@@ -82,6 +91,10 @@ def response_mock(request):
         ('john', 'some_project'),
 ))
 def test_user_repo_view_get(owner, repo_name, response_mock):
+    """
+    This function tests views.UserRepoView.get method for each parameters declared above with ResponseMock()
+    and RequestMock() objects
+    """
     Session.get = Mock()
     Session.get.return_value = response_mock
 
@@ -92,7 +105,7 @@ def test_user_repo_view_get(owner, repo_name, response_mock):
         with pytest.raises((requests.ConnectionError, APIException)):
             UserRepoView().get(RequestMock(), owner, repo_name)
     elif response_mock.status_code == 504:
-        with pytest.raises((requests.ConnectionError, APIException)):
+        with pytest.raises((requests.Timeout, APIException)):
             UserRepoView().get(RequestMock(), owner, repo_name)
     else:
         response = UserRepoView().get(RequestMock(), owner, repo_name)
@@ -104,6 +117,10 @@ def test_user_repo_view_get(owner, repo_name, response_mock):
 
 
 def test_other_endpoint_view():
+    """
+    This function tests if not_found view returns proper format of response.data with 'message'
+    and 'documentation_url' keys
+    """
     request_factory = RequestFactory()
     request = request_factory.get('/path', data={'name': u'test'})
     response = not_found(request)
