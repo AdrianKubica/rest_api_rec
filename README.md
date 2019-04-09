@@ -17,7 +17,7 @@ REST API includes:
 
 Clone project from bitbucket:
 - `$ git clone -b development git@bitbucket.org:AdrianKubica/rest_api.git .`
-lub
+or
 - `$ git clone https://github.com/AdrianKubica/rest_api_rec.git .`
 
 You can run this project with `docker-compose`:

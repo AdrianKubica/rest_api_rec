@@ -21,6 +21,9 @@ You can run this project with docker-compose:
 
 All you need is docker and docker-compose installed.
 
+Clone project from bitbucket:
+- ``$ git clone -b development git@bitbucket.org:AdrianKubica/rest_api.git .``
+
 Then go to your HOST IP Address and retrieve user repository information using following endpoint:
 
     - ``/repositories/{owner}/{repository-name}``

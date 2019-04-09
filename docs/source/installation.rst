@@ -28,7 +28,7 @@ Verify your installation with following command:
 Go to a directory where you would like to run application and check directory permissions.
 Clone git repository to this application.
     - ``$ git clone -b development git@bitbucket.org:AdrianKubica/rest_api.git .``
-    lub
+    or
     - ``$ git clone https://github.com/AdrianKubica/rest_api_rec.git .``
 Dont forget to fill ALLOWED_HOSTS setting in services/rest/app/settings.py file according to security reasons, otherwise at production environment you will get Bad Request (400) Error).
     - ``$ vim services/rest/app/settings.py``
