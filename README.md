@@ -90,7 +90,7 @@ Those files can be used to switch API versions in Django REST Framework to `Brow
 
 If for some reasons advanced features of nginx are unnecessary you can also consider WhiteNoise for serving `Browsable API` static files.
 
-Also if you are bitbucket user you should consider to change TravisCI with Bitbucket Pipelines or CircleCI.
+Also if you are bitbucket user you should consider to change TravisCI for Bitbucket Pipelines or CircleCI.
 
 Questions:
 ----------
