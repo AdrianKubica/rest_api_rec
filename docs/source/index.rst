@@ -16,11 +16,12 @@ REST API includes:
     - Gunicorn configuration.
 
 Clone project from bitbucket:
-- ``$ git clone -b development git@bitbucket.org:AdrianKubica/rest_api.git .``
+
+    - ``$ git clone -b development git@bitbucket.org:AdrianKubica/rest_api.git .``
 
 You can run this project with docker-compose:
 
-``$ docker-compose up --build -d``
+    - ``$ docker-compose up --build -d``
 
 All you need is docker and docker-compose installed.
 
