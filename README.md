@@ -85,6 +85,9 @@ This project is able to make some trade-offs, consider following:
 You should consider to use Host OS environment variables and load those variables to specific Dockerfile's with:
 `ENV VARIABLE_NAME ${VARIABLE_NAME}` syntax. In more complex project you should also consider to split your settings.py files for production and development environments.
 
+Repository also includes some static files which looks like unnecessary files.
+Those files can be used to switch API versions in Django REST Framework to `Browsable API` and for the sake of consistency are included in repository.
+
 
 Questions:
 ----------
