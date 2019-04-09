@@ -15,3 +15,5 @@ Repository also includes some static files which looks like unnecessary files.
 Those files can be used to switch API versions in Django REST Framework to ``Browsable API`` and for the sake of consistency are included in repository.
 
 If for some reasons advanced features of nginx are unnecessary you can also consider WhiteNoise for serving ``Browsable API`` static files.
+
+Also if you are bitbucket user you should consider to change TravisCI with Bitbucket Pipelines or CircleCI.
