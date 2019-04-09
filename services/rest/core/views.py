@@ -113,7 +113,7 @@ class UserRepoView(views.APIView):
 @api_view()
 def not_found(request: Request) -> Response:
     """
-    This view handles each request which is not directed for any other view in application. Its responsible for
+    This view handles each request which is not directed for any other endpoints in application. Its responsible for
     returning user friendly Not Found message in JSON format and 404 HTTP status code.
 
     :param request: Client HTTP request directed to not_found API view
