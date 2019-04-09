@@ -21,7 +21,10 @@ You can run this project with `docker-compose`:
 ```
 
 Then go to your HOST IP address and retrieve user repository information using following endpoint:
-`/repositories/{owner}/{repository-name}`. Replace `{owner}` and `{respository-name}` with appropriate values for truly existing user repository.
+
+- `/repositories/{owner}/{repository-name}`
+
+Replace `{owner}` and `{respository-name}` with appropriate values for truly existing user repository.
 Dont forget to fill ALLOWED_HOSTS setting in `services/rest/app/settings.py` file according to security reasons, otherwise at production environment you will get `Bad Request (400) Error`).
 
 
