@@ -17,17 +17,17 @@ REST API includes:
 
 Clone project from bitbucket:
 
-    - ``$ git clone -b development git@bitbucket.org:AdrianKubica/rest_api.git .``
+``$ git clone -b development git@bitbucket.org:AdrianKubica/rest_api.git .``
 
 You can run this project with docker-compose:
 
-    - ``$ docker-compose up --build -d``
+``$ docker-compose up --build -d``
 
 All you need is docker and docker-compose installed.
 
 Then go to your HOST IP Address and retrieve user repository information using following endpoint:
 
-    - ``/repositories/{owner}/{repository-name}``
+``/repositories/{owner}/{repository-name}``
 
 Replace {owner} and {repository-name} with appropriate values for truly existing user repository.
 Dont forget to fill ALLOWED_HOSTS in services/rest/app/settings.py file according to security reasons, otherwise at production environment you will get Bad Request (400) Error).
