@@ -88,6 +88,7 @@ You should consider to use Host OS environment variables and load those variable
 Repository also includes some static files which looks like unnecessary files.
 Those files can be used to switch API versions in Django REST Framework to `Browsable API` and for the sake of consistency are included in repository.
 
+If for some reasons advanced features of nginx are unnecessary you can also consider WhiteNoise for serving ``Browsable API`` static files.
 
 Questions:
 ----------
