@@ -15,6 +15,11 @@ REST API includes:
 - Caching abilities with Redis,
 - Gunicorn configuration.
 
+Clone project from bitbucket:
+- `$ git clone -b development git@bitbucket.org:AdrianKubica/rest_api.git .`
+lub
+- `$ git clone https://github.com/AdrianKubica/rest_api_rec.git .`
+
 You can run this project with `docker-compose`:
 ``` 
 >>> docker-compose up --build -d
